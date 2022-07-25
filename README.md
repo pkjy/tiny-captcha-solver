@@ -5,7 +5,7 @@
 python 3.8
 
 ### demo
-#### run
+#### run(server)
 ```bash
 # Install dependency 
 apt-get install -y tesseract-ocr python3-opencv
@@ -55,10 +55,11 @@ will return target position `{x1,x2,y1,y2}` like
 ```
 raw input
 
-![full](./examples/slide/full2.png)
+![full](./examples/slide/full2.png)  
 ![source](./examples/slide/marker2.png)
 
- result
+result  
+
 ![result](./result.png)
 
 
@@ -80,7 +81,9 @@ will return target position `{"code": 0,"result": ["47SS"]}` like
         "47SS"
     ]
 }
-raw input
+```
+
+raw input  
 ![ocr](./examples/ocr/15.jpg)
 
 
