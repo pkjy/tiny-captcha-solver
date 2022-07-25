@@ -1,0 +1,16 @@
+{
+  "cSpell.words": [
+    "CCOEFF",
+    "fromarray",
+    "frombuffer",
+    "imdecode",
+    "IMREAD",
+    "imshow",
+    "imwrite",
+    "jsonify",
+    "pkjy",
+    "pytesseract",
+    "tessdata",
+    "tesseract"
+  ]
+}
