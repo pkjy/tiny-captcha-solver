@@ -1,33 +1,55 @@
-# TinyCaptchaSolver
-> A tiny simple out-of-the-box api for slide captcha and ocr captcha. using opencv and tesseract. self training tessdata.
+# tiny-captcha-solver
+> A tiny simple out-of-the-box api for slide captcha and ocr captcha. using opencv and tesseract. self training tessdata. 一个简易的验证码识别服务，支持数字、字母的OCR以及滑动验证码的缺口识别。
 
-### Environment 
-python 3.8
+### 运行环境 
+* python 3.8+
+* opencv 
+* tesseract 4.0+
 
-### demo
-#### run(server)
-```bash
-# Install dependency 
+### 特性
+* 滑块验证码的缺口位置识别  
+* 简单数字或字母的OCR识别  
+* 自训练数据集，增加对某些字体的识别成功率
+
+### 服务器部署
+
+```shell script
+# 获取代码
+git clone https://github.com/pkjy/tiny-captcha-solver.git
+
+# 进入项目目录
+cd tiny-captcha-solver
+
+# 安装依赖
 apt-get install -y tesseract-ocr python3-opencv
 pip3 install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
 
-# Run
+# 运行
 python app.py
 ```
-#### run(docker)
-```bash
-git clone https://github.com/pkjy/tiny_captcha_solver.git
+### Docker部署  
+使用 Dockerfile 构建 或者直接 Pull镜像  
+```shell script
+# 获取代码
+git clone https://github.com/pkjy/tiny-captcha-solver.git
 
-cd tiny_captcha_solver
+# 进入项目目录
+cd tiny-captcha-solver
 
-# 修改entrypoint.sh中的参数，具体参数往上翻，默认9898端口，同时开启ocr模块以及目标检测模块
-
-# 编译镜像
-docker build -t tiny_captcha_solver:v1 .
+# dockerfile 构建
+docker build -t tiny-captcha-solver:latest .
 
 # 运行镜像
-docker run -p 5000:5000 --name tiny_captcha_solver -d tiny_captcha_solver:v1
-```
+docker run -p 5000:5000 --name tiny-captcha-solver -d tiny-captcha-solver:latest
+```  
+
+```shell script
+# 从 dockerhub pull
+docker pull pkjy/tiny-captcha-solver:latest
+# 运行镜像
+docker run -itd --rm -p 5000:5000 --name tiny-captcha-solver pkjy/tiny-captcha-solver:latest
+```  
+
 
 #### use
 ##### send request in local, for slide.
