@@ -63,8 +63,8 @@ def ocr(b64Data):
 
 def tesseract(im_res):
   test_message = Image.fromarray(im_res)
-  tessdata_dir = "--tessdata-dir "+os.path.abspath("/tessdata")
-  text = pytesseract.image_to_string(test_message,config=tessdata_dir,lang='pkjy')
+  tessdata_dir = "--psm 7 --tessdata-dir "+os.path.abspath("/tessdata")
+  text = pytesseract.image_to_string(test_message,config=tessdata_dir,lang='pkjyv6')
   # print(f'识别结果：{text}')
   return text.replace("\n", "").replace("\f","")
 
