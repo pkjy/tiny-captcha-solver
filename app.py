@@ -16,6 +16,11 @@ def show(name):
   cv2.waitKey(0)
   cv2.destroyAllWindows()
 
+def remove_blank(list):
+  result = []
+  for s in list:
+    result.append(s.replace(' ', ''))
+  return result
 
 def _tran_canny(image):
   """消除噪声"""
@@ -61,10 +66,10 @@ def ocr(b64Data):
   return im_res
 
 
-def tesseract(im_res):
+def tesseract(im_res,lang):
   test_message = Image.fromarray(im_res)
   tessdata_dir = "--psm 7 --tessdata-dir "+os.path.abspath("/tessdata")
-  text = pytesseract.image_to_string(test_message,config=tessdata_dir,lang='pkjyv6')
+  text = pytesseract.image_to_string(test_message,config=tessdata_dir,lang=lang)
   # print(f'识别结果：{text}')
   return text.replace("\n", "").replace("\f","")
 
@@ -78,18 +83,22 @@ def pong():
 def analyzeOcr():
   postData = request.json
   result = []
+  type = request.args.get("type")
+  accept_type = ["pkjy.num","pkjy.alphabet_num"]
+  if type not in accept_type:
+    type = "pkjy.alphabet_num"
   for b64 in postData['base64']:
     try:
       filePath = writeFile(b64)[0]
-      result.append(tesseract(ocr(filePath)))
+      result.append(tesseract(ocr(filePath),type))
     except Exception as e:
       os.remove(filePath)  
       print(e)
       return jsonify(error='analyze failed')
     else:
       os.remove(filePath)  
- 
-  return jsonify(code = 0,result = result)
+  print("result",remove_blank(result))
+  return jsonify(code = 0,result = remove_blank(result))
 
 
 @app.route("/slide/base64", methods=['POST', 'GET'])

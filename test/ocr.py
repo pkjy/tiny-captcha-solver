@@ -2,7 +2,7 @@ import requests
 import os
 import json
 import base64
-url = "http://127.0.0.1:5000/ocr/base64"
+url = "http://127.0.0.1:5000/ocr/base64?type=pkjy.num"
 
 
 headers = {
@@ -22,14 +22,14 @@ def check(file_name,base64_data):
     ]
   })
   response = requests.request("GET", url, headers=headers, data=payload)
-  if json.loads(response.text).get('result')[0]==file_name.split('_')[0] :
+  if json.loads(response.text).get('result')[0].upper()==file_name.split('_')[0].upper() :
     print(file_name.split('_')[0],'相等')
     success += 1
   else:
-    print(file_name.split('_')[0],'不相等')
+    print(file_name.split('_')[0],'不相等',json.loads(response.text).get('result')[0])
 
 if __name__ == '__main__':
-  g = os.walk(r"./examples/ocr")
+  g = os.walk(r"./examples/ocr/num")
   for path,dir_list,file_list in g:
     for file_name in file_list:
       with open(os.path.join(path, file_name), 'rb') as f:
