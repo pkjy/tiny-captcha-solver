@@ -2,6 +2,7 @@
 > A tiny simple out-of-the-box api for slide captcha and ocr captcha. using opencv and tesseract. self training tessdata. 一个简易的验证码识别服务，支持数字、字母的OCR以及滑动验证码的缺口识别。
 
 ## 运行环境 
+* debian 9/ debian 10 /debian 11
 * python 3.8+
 * opencv 
 * tesseract 4.0+
@@ -23,6 +24,10 @@ cd tiny-captcha-solver
 # 安装依赖
 apt-get install -y tesseract-ocr python3-opencv
 pip3 install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
+
+# 拷贝识别的数据集
+mkdir /tessdata
+cp -r tessdata/* /
 
 # 运行
 python app.py
